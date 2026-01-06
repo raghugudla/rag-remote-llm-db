@@ -2,6 +2,7 @@
 Streamlit app for RAG.
 """
 
+import os
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -18,6 +19,10 @@ from src.metrics.evaluate_rag import run_evaluation
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+st.set_page_config(
+    page_title="Skåne Mobility Assistant",
+    layout="wide",
+)
 
 # -----------------------------
 # Session state initialization
@@ -39,7 +44,7 @@ if "messages" not in st.session_state:
 # -----------------------------
 # Sidebar: Controls & Metrics
 # -----------------------------
-st.sidebar.title("🚌 Mobility RAG Assistant")
+st.sidebar.title("Mobility RAG Assistant")
 st.sidebar.markdown("**Models:**")
 st.sidebar.markdown(f"- Embeddings: {config.embedding_model_name}")
 st.sidebar.markdown(f"- LLM: {config.llm_model_name}")
@@ -162,13 +167,13 @@ if st.sidebar.button("Run Evaluation"):
             st.info("Charts unavailable - download CSV for analysis.")
     
     st.sidebar.success("Full evaluation complete!")
-    st.balloons()
+    #st.balloons()
 
 
 # -----------------------------
 # Main Chat Interface
 # -----------------------------
-st.title("🚌 Skåne Mobility Assistant")
+st.title("Skåne Mobility Assistant")
 st.markdown("Fråga om transport, infrastruktur och resbeteende.")
 
 # Display chat history
